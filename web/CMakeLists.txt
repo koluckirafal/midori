@@ -21,13 +21,13 @@ foreach(UNIT_SRC ${EXTENSIONS})
             ${CMAKE_SOURCE_DIR}/core/plugins.vala
             ${CMAKE_SOURCE_DIR}/core/settings.vala
         PACKAGES
-            libsoup-2.4 libpeas-1.0 sqlite3
+            gtk+-3.0 libsoup-3.0 libpeas-1.0 sqlite3
         OPTIONS
             ${VALAFLAGS}
         CUSTOM_VAPIS
             ${CMAKE_SOURCE_DIR}/vapi/config.vapi
-            ${CMAKE_SOURCE_DIR}/vapi/webkit2gtk-web-extension-4.0.vapi
-            ${CMAKE_SOURCE_DIR}/vapi/javascriptcoregtk-4.0.vapi
+            ${CMAKE_SOURCE_DIR}/vapi/webkit2gtk-web-extension-4.1.vapi
+            ${CMAKE_SOURCE_DIR}/vapi/javascriptcoregtk-4.1.vapi
         )
 
         add_library(${UNIT} MODULE ${UNIT_SRC_C})

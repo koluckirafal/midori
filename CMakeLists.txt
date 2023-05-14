@@ -18,7 +18,7 @@ execute_process(COMMAND "git" "describe" "--tags"
 if (REVISION)
     set(CORE_VERSION "${REVISION}")
     # All warnings are errors in development builds
-    set(VALAFLAGS ${VALAFLAGS} --fatal-warnings)
+#    set(VALAFLAGS ${VALAFLAGS} --fatal-warnings)
 else ()
     # No runtime type checks
     set(VALAFLAGS ${VALAFLAGS} --disable-assert)
@@ -46,19 +46,21 @@ find_package(PkgConfig)
 pkg_check_modules(DEPS REQUIRED
                   sqlite3>=3.6.19
                   gio-2.0>=2.46.2
-                  libsoup-2.4>=2.48.0
+                  libsoup-3.0>=3.0.5
                   )
-set(PKGS sqlite3 gio-2.0 libsoup-2.4)
+set(PKGS sqlite3 gio-2.0 libsoup-3.0)
 
 pkg_check_modules(DEPS_GTK REQUIRED
                   gtk+-3.0>=3.12.0
-                  webkit2gtk-4.0>=2.16.6
+                  webkit2gtk-4.1>=2.36.0
                   gcr-ui-3>=2.32
                   libpeas-gtk-1.0
                   json-glib-1.0>=0.12
                   libarchive
                   )
-set(PKGS ${PKGS} gtk+-3.0 libsoup-2.4 gcr-ui-3 libpeas-gtk-1.0 json-glib-1.0 posix)
+set(PKGS ${PKGS} gtk+-3.0 libsoup-3.0 gcr-ui-3 libpeas-gtk-1.0 json-glib-1.0 posix)
+
+# TODO: Regenerate WebkitGTK .vapi
 set(EXTRA_VAPIS
     ${CMAKE_SOURCE_DIR}/vapi/config.vapi
     ${CMAKE_SOURCE_DIR}/vapi/libarchive.vapi

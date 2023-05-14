@@ -214,7 +214,7 @@ namespace Midori {
             }
 
             var monitor = NetworkMonitor.get_default ();
-            string hostname = new Soup.URI (uri).host;
+            string hostname = GLib.Uri.parse (uri, GLib.UriFlags.NONE).get_host ();
             string? title = null;
             string? message = null;
             if (!monitor.network_available) {
@@ -348,11 +348,11 @@ namespace Midori {
                     break;
                 case WebKit.ScriptDialogType.CONFIRM:
                 case WebKit.ScriptDialogType.BEFORE_UNLOAD_CONFIRM:
-                    string hostname = new Soup.URI (uri).host;
+                    string hostname = GLib.Uri.parse (uri, GLib.UriFlags.NONE).get_host ();
                     dialog.confirm_set_confirmed(((Browser)get_toplevel ()).prompt (hostname, dialog.get_message (), _("_Confirm")) != null);
                     break;
                 case WebKit.ScriptDialogType.PROMPT:
-                    string hostname = new Soup.URI (uri).host;
+                    string hostname = GLib.Uri.parse (uri, GLib.UriFlags.NONE).get_host ();
                     dialog.prompt_set_text(((Browser)get_toplevel ()).prompt (hostname, dialog.get_message (), _("_Confirm"), dialog.prompt_get_default_text ()));
                     break;
             }
@@ -373,14 +373,14 @@ namespace Midori {
             }
             notification.set_body (webkit_notification.body);
             // Use a per-host ID to avoid collisions, but neglect the tag
-            string hostname = new Soup.URI (uri).host;
+            string hostname = GLib.Uri.parse (uri, GLib.UriFlags.NONE).get_host ();
             Application.get_default ().send_notification ("web-%s".printf (hostname), notification);
             return true;
         }
 
         public override bool permission_request (WebKit.PermissionRequest permission) {
             if (permission is WebKit.GeolocationPermissionRequest) {
-                string hostname = new Soup.URI (uri).host;
+                string hostname = GLib.Uri.parse (uri, GLib.UriFlags.NONE).get_host ();
                 message.label = _("%s wants to know your location.").printf (hostname);
             } else if (permission is WebKit.NotificationPermissionRequest) {
                 permission.allow ();

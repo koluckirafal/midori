@@ -67,8 +67,8 @@ parts:
     build-packages:
       - git
       - valac
-      - libwebkit2gtk-4.0-dev
-      - libsoup-gnome2.4-dev
+      - libwebkit2gtk-4.1-dev
+      - libsoup-3.0-dev
       - libgcr-3-dev
       - libpeas-dev
       - libsqlite3-dev
@@ -80,7 +80,7 @@ parts:
     stage-packages:
       - libjson-glib-1.0-0
       - libarchive13
-      - libwebkit2gtk-4.0-37
+      - libwebkit2gtk-4.1-37
       - libgcr-base-3-1
       - libgcr-ui-3-1
       - libgck-1-0
@@ -108,8 +108,7 @@ parts:
       - -usr/share/gir-1.0/Midori-0.6.gir
       - -usr/lib/*/libcups.so.2
       - -usr/share/doc/libcups2/changelog.Debian.gz
-      - -usr/lib/*/libsoup-2.4.so.1.7.0
-      - -usr/lib/*/libsoup-gnome-2.4.so.1.7.0
+      - -usr/lib/*/libsoup-3.0.so.0.6.0
       - -usr/lib/*/libjpeg.so.8.0.2
       - -usr/share/doc
       - -usr/lib/*/libX11-xcb.so.1.0.0

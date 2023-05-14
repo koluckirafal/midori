@@ -27,10 +27,11 @@ public void webkit_web_extension_initialize_with_user_data (WebKit.WebExtension 
                 if (uri != null && uri != "") {
                     // Relative URL
                     if (!("://" in uri)) {
-                        var soup_uri = new Soup.URI (page.uri);
-                        soup_uri.set_path ("/" + uri);
-                        soup_uri.set_query (null);
-                        uri = soup_uri.to_string (false);
+                        var soup_uri = GLib.Uri.parse (page.uri, GLib.UriFlags.NONE);
+                        //soup_uri.set_path ("/" + uri);
+                        //soup_uri.set_query (null);
+                        soup_uri = GLib.Uri.parse_relative (soup_uri, "/" + uri, GLib.UriFlags.NONE);
+                        uri = soup_uri.to_string ();
                     }
                     debug ("Found thumbnail for %s: %s", page.uri, uri);
                     var history = Midori.HistoryDatabase.get_default ();

@@ -317,7 +317,7 @@ namespace Midori {
                 });
                 trust.clicked.connect (() => {
                     var tab = ((Browser)get_toplevel ()).tab;
-                    tab.web_context.allow_tls_certificate_for_host (tab.tls, new Soup.URI (uri).host);
+                    tab.web_context.allow_tls_certificate_for_host (tab.tls, GLib.Uri.parse (uri, GLib.UriFlags.NONE).get_host ());
                     security.hide ();
                     tab.reload ();
                 });
