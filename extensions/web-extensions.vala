@@ -256,10 +256,10 @@ namespace WebExtension {
         Midori.Browser browser { get { return app.active_window as Midori.Browser; } }
 
         void web_extension_message_received (WebKit.WebView web_view, WebKit.JavascriptResult result) {
-            unowned JS.GlobalContext context = result.get_global_context ();
-            unowned JS.Value value = result.get_value ();
-            if (value.is_object (context)) {
-                var object = value.to_object (context);
+            unowned JSC.Value value = result.get_js_value ();
+            unowned JSC.Context context = value.get_context ();
+            if (value.is_object ()) {
+                var object = new JSC.Value.object (context, value, null);
                 string? fn = js_to_string (context, object.get_property (context, new JS.String.create_with_utf8_cstring ("fn")));
                 if (fn != null && fn.has_prefix ("tabs.create")) {
                     var args = object.get_property (context, new JS.String.create_with_utf8_cstring ("args")).to_object (context);
@@ -397,11 +397,11 @@ namespace WebExtension {
         }
     }
 
-    static string? js_to_string (JS.GlobalContext context, JS.Value value) {
-        if (!value.is_string (context)) {
+    static string? js_to_string (JSC.Context context, JSC.Value value) {
+        if (!value.is_string ()) {
             return null;
         }
-        var str = value.to_string_copy (context);
+        var str = value.to_string_copy ();
         uint8[] buffer = new uint8[str.get_maximum_utf8_cstring_size ()];
         str.get_utf8_cstring (buffer);
         return ((string)buffer);
