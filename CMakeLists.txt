@@ -64,8 +64,8 @@ set(PKGS ${PKGS} gtk+-3.0 libsoup-3.0 gcr-ui-3 libpeas-gtk-1.0 json-glib-1.0 pos
 set(EXTRA_VAPIS
     ${CMAKE_SOURCE_DIR}/vapi/config.vapi
     ${CMAKE_SOURCE_DIR}/vapi/libarchive.vapi
-    ${CMAKE_SOURCE_DIR}/vapi/webkit2gtk-4.0.vapi
-    ${CMAKE_SOURCE_DIR}/vapi/javascriptcoregtk-4.0.vapi)
+    ${CMAKE_SOURCE_DIR}/vapi/webkit2gtk-4.1.vapi
+    ${CMAKE_SOURCE_DIR}/vapi/javascriptcoregtk-4.1.vapi)
 
 add_definitions("-DGCR_API_SUBJECT_TO_CHANGE")
 set(CFLAGS "${CFLAGS} -g")
